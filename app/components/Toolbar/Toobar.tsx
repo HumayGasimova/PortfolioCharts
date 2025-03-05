@@ -4,13 +4,26 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import styles from './Toolbar.module.scss';
 import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
 
+import * as Lists from '../../Lists';
+
 import { 
   FontAwesomeIcon 
 } from '@fortawesome/react-fontawesome';
 
 import { 
-  faSearch
+  faBars,
+  faCompress,
+  faExclamation,
+  faExpand,
+  faGear,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { 
+  faBell,
+  faEnvelope,
+  faMoon,
+} from '@fortawesome/free-regular-svg-icons';
 
 type Inputs = {
   example: string
@@ -26,7 +39,52 @@ export default function Toobar() {
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
-  console.log(watch("example")) // watch input value by passing the name of it
+ const setIconName = (opt: string) => {
+    switch(opt){
+      case 'faMoon':
+        return faMoon;
+      case 'faEnvelope':
+        return faEnvelope;
+      case 'faBell':
+        return faBell;
+      case 'faExpand':
+        return faExpand;
+      case 'faCompress':
+        return faCompress;
+      case 'faBars':
+        return faBars;
+      case 'faGear':
+        return faGear;
+      default:
+        return faExclamation;
+    }
+ }
+
+  const renderListOfToolbarItems = () => {
+    return(
+      <div className={styles.toolbarRightPartWrapper}>
+          {Lists.listOfToolbarItems.map((el, i) => {
+              return(
+                  <div 
+                    key={i}
+                    className={styles.toolbarItem}
+                    // onMouseDown={(e) => onPageClickHandler(e, "pageNumber", el.id)}
+                  >
+                    {el.type === "icon" ?
+                      <FontAwesomeIcon 
+                        icon={setIconName(el.name)}
+                        color={setIconName(el.name) === faExclamation ? 'red' : 'rgb(165, 165, 165)'}
+                        size='lg'
+                        spin={el.action === "spin" ? true: false}
+                      /> : 
+                      null
+                    }
+                  </div>
+              )
+          })}
+      </div>
+  )
+  }
 
   return (
     <div className={styles.toolbarContainerWrapper}>
@@ -39,20 +97,16 @@ export default function Toobar() {
           <MenuIcon/>
           <div className={styles.searchFieldWrapper}>
              <form onSubmit={handleSubmit(onSubmit)}>
-              <input className={styles.searchField} defaultValue="Search for anything..." {...register("example")} />
+              <input className={styles.searchField} placeholder="Search for anything..." {...register("example")} />
               <FontAwesomeIcon 
-              icon={faSearch}
-              color='rgb(165, 165, 165)'
-              size='sm'
-            />
+                icon={faSearch}
+                color='rgb(165, 165, 165)'
+                size='sm'
+              />
             </form>
-          
           </div>
-      
         </div>
-        <div className={styles.toolbarRightPartWrapper}>
-          <div>List of icons</div>
-        </div>
+        {renderListOfToolbarItems()}
       </div>
     </div>
   )
