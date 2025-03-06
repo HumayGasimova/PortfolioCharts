@@ -100,8 +100,12 @@ const loadImg = (key: string) => {
         return Images.AZERI_FLAG;
       case 'rus':
         return Images.RUS_FLAG;
-      case 'uk':
+      case 'eng':
         return Images.UK_FLAG;
+      case 'german':
+        return Images.GERMANS_FLAG;
+      case 'spanish':
+        return Images.SPAIN_FLAG;
       case 'profile':
         return Images.PROFILE_FHOTO;
       default:
@@ -109,6 +113,25 @@ const loadImg = (key: string) => {
   }
 }
 
+const renderDropdowns = () => {
+  if(langDropdownShown){
+    return(
+      <div className={styles.langDropdownWrapper}>
+        {Lists.listOfLang.map(el => {
+          return(
+            <div key={el.id}>
+              {el.name}
+            </div>
+          )
+        })}
+      </div>
+    )
+
+  }
+  // else if(){
+
+  // }
+}
 const renderImage = (key: string) => {
   switch(key){
     case "lang":
@@ -119,16 +142,16 @@ const renderImage = (key: string) => {
           alt={key}
           width={23}
           height={23}
+          quality={100}
         />
     </div>
     );
     case "profile":
-      return(<div className={styles.toolbarImageWrapper}>
+      return(<div className={styles.toolbarImageWrapper} style={{width: "36px", height: "36px"}}>
         <Image 
             src={loadImg(key)}
             alt={key}
-            width={34}
-            height={34}
+            quality={100}
         />
       </div>);
       default:
@@ -138,27 +161,30 @@ const renderImage = (key: string) => {
 
   const renderListOfToolbarItems = () => {
     return(
-      <div className={styles.toolbarRightPartWrapper}>
+      <>
+        <div className={styles.toolbarRightPartWrapper}>
           {Lists.listOfToolbarItems.map((el, i) => {
-              return(
-                  <div 
-                    key={i}
-                    className={styles.toolbarItem}
-                    onMouseDown={(e) => onToolbarIconClick(e, el.key)}
-                  >
-                    {el.type === "icon" ?
-                      <FontAwesomeIcon 
-                        icon={setIconName(el.name)}
-                        color={setIconName(el.name) === faExclamation ? 'red' : 'rgb(165, 165, 165)'}
-                        size='lg'
-                        spin={el.action === "spin" ? true: false}
-                      /> : renderImage(el.key)
-                    }
-                  </div>
-              )
+            return(
+              <div 
+                key={i}
+                className={styles.toolbarItem}
+                onMouseDown={(e) => onToolbarIconClick(e, el.key)}
+              >
+                {el.type === "icon" ?
+                  <FontAwesomeIcon 
+                    icon={setIconName(el.name)}
+                    color={setIconName(el.name) === faExclamation ? 'red' : 'rgb(165, 165, 165)'}
+                    size='lg'
+                    spin={el.action === "spin" ? true: false}
+                  /> : renderImage(el.key)
+                }
+              </div>
+            )
           })}
-      </div>
-  )
+          {renderDropdowns()}
+        </div>
+      </>
+    )
   }
 
   return (
