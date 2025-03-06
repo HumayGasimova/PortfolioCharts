@@ -1,10 +1,8 @@
 import React from 'react';
 import { useForm, SubmitHandler } from "react-hook-form"
-
-import styles from './Toolbar.module.scss';
-import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
-
-import * as Lists from '../../Lists';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/lib/store';
+import Image from 'next/image';
 
 import { 
   FontAwesomeIcon 
@@ -25,6 +23,17 @@ import {
   faMoon,
 } from '@fortawesome/free-regular-svg-icons';
 
+import styles from './Toolbar.module.scss';
+import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
+
+import {
+  showLangDropdown
+} from '../../../lib/slices/portfolioSlice';
+
+import * as Lists from '../../Lists';
+import * as Images from '../../constants/images';
+
+
 type Inputs = {
   example: string
   exampleRequired: string
@@ -38,6 +47,15 @@ export default function Toobar() {
     formState: { errors },
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+
+  const langDropdownShown = useSelector(
+    (state: RootState) => state.portfolio.langDropdownShown,
+  )
+  const selectedLangKey = useSelector(
+    (state: RootState) => state.portfolio.selectedLangKey,
+  )
+  const dispatch = useDispatch();
+  // const [incrementAmount, setIncrementAmount] = useState('2');
 
  const setIconName = (opt: string) => {
     switch(opt){
@@ -60,6 +78,64 @@ export default function Toobar() {
     }
  }
 
+ const onToolbarIconClick = (e: React.MouseEvent, btnKey: string) => {
+  
+  if(e.button === 2) return;
+
+  if(e.button !== 1){
+    switch(btnKey){
+      case 'lang': 
+        dispatch(showLangDropdown(!langDropdownShown))
+        break;
+    }
+
+  }else{
+
+  }
+}
+
+const loadImg = (key: string) => {
+  switch(key) {
+      case 'azeri':
+        return Images.AZERI_FLAG;
+      case 'rus':
+        return Images.RUS_FLAG;
+      case 'uk':
+        return Images.UK_FLAG;
+      case 'profile':
+        return Images.PROFILE_FHOTO;
+      default:
+        return Images.UK_FLAG;
+  }
+}
+
+const renderImage = (key: string) => {
+  switch(key){
+    case "lang":
+    return(
+      <div className={styles.toolbarImageWrapper}>
+        <Image 
+          src={loadImg(selectedLangKey)}
+          alt={key}
+          width={23}
+          height={23}
+        />
+    </div>
+    );
+    case "profile":
+      return(<div className={styles.toolbarImageWrapper}>
+        <Image 
+            src={loadImg(key)}
+            alt={key}
+            width={34}
+            height={34}
+        />
+      </div>);
+      default:
+        return (<></>)
+  }
+}
+
   const renderListOfToolbarItems = () => {
     return(
       <div className={styles.toolbarRightPartWrapper}>
@@ -68,7 +144,7 @@ export default function Toobar() {
                   <div 
                     key={i}
                     className={styles.toolbarItem}
-                    // onMouseDown={(e) => onPageClickHandler(e, "pageNumber", el.id)}
+                    onMouseDown={(e) => onToolbarIconClick(e, el.key)}
                   >
                     {el.type === "icon" ?
                       <FontAwesomeIcon 
@@ -76,8 +152,7 @@ export default function Toobar() {
                         color={setIconName(el.name) === faExclamation ? 'red' : 'rgb(165, 165, 165)'}
                         size='lg'
                         spin={el.action === "spin" ? true: false}
-                      /> : 
-                      null
+                      /> : renderImage(el.key)
                     }
                   </div>
               )

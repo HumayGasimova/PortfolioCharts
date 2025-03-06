@@ -51,8 +51,18 @@
             justify-content: end;
             align-items: center;
             .toolbarItem {
-            padding: 10px;
-            cursor: pointer;
+                padding: 10px;
+                cursor: pointer;
+                .toolbarImageWrapper{
+                    border-radius: 50%;
+                    background-color: rgb(236 240 250);
+                    >img {
+                        filter: contrast(160%);
+                        width: 100%;
+                        border-radius: 50%;
+                        opacity: 0.8;
+                    }
+                }
             }
         }
     }

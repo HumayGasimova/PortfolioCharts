@@ -3,12 +3,14 @@ import { jsonPlaceholderApi } from "./services/jsonPlaceholderApi";
 import { setupListeners } from '@reduxjs/toolkit/query';
 import employersSliceReducers from "./slices/employerSlice";
 import counterSliceReducers from "./slices/counterSlice";
+import portfolioReducer from "./slices/portfolioSlice";
 
 export const store = configureStore({
     reducer: {
         [jsonPlaceholderApi.reducerPath]: jsonPlaceholderApi.reducer,
         employers: employersSliceReducers,
-        counter: counterSliceReducers
+        counter: counterSliceReducers,
+        portfolio: portfolioReducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(
