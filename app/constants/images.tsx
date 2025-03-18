@@ -1,6 +1,6 @@
 import * as AzeriFlag from '../assets/flags/flag_14538857.png';
-import * as RusFlag from '../assets/flags/flag_14538857.png';
-import * as UKFlag from '../assets/flags/flag_14538857.png';
+import * as RusFlag from '../assets/flags/russia_5315463.png';
+import * as UKFlag from '../assets/flags/uk_4628638.png';
 import * as GermanFlag from '../assets/flags/germany.png';
 import * as SpainFlag from '../assets/flags/spain.png';
 

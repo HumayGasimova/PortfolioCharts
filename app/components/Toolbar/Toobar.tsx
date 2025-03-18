@@ -27,7 +27,8 @@ import styles from './Toolbar.module.scss';
 import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
 
 import {
-  showLangDropdown
+  showLangDropdown,
+  setPortfolioLang
 } from '../../../lib/slices/portfolioSlice';
 
 import * as Lists from '../../Lists';
@@ -113,14 +114,28 @@ const loadImg = (key: string) => {
   }
 }
 
+const changeLang = (key: string) => {
+  dispatch(showLangDropdown(false));
+  dispatch(setPortfolioLang(key));
+}
+
 const renderDropdowns = () => {
   if(langDropdownShown){
     return(
       <div className={styles.langDropdownWrapper}>
         {Lists.listOfLang.map(el => {
           return(
-            <div key={el.id}>
-              {el.name}
+            <div key={el.id} className={styles.langWrapper} onClick={()=> changeLang(el.key)}>
+               <Image 
+                src={loadImg(el.key)}
+                alt={el.key}
+                width={23}
+                height={23}
+                quality={100}
+              />
+              <div className={styles.langName}>
+                {el.name}
+              </div>
             </div>
           )
         })}

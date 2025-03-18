@@ -10,10 +10,12 @@ export const portfolioSlice = createSlice({
     showLangDropdown: (state, action) => {
       state.langDropdownShown = action.payload;
     },
-   
+    setPortfolioLang: (state, action) => {
+      state.selectedLangKey = action.payload;
+    },
   },
 })
 
-export const { showLangDropdown } = portfolioSlice.actions
+export const { showLangDropdown, setPortfolioLang } = portfolioSlice.actions
 
 export default portfolioSlice.reducer
