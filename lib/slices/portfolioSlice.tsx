@@ -81,7 +81,6 @@ export const portfolioSlice = createSlice({
       state.selectedLangKey = action.payload;
     },
     setPortfolioMood: (state, action) => {
-      console.log(action.payload)
       let mood = state.toolbarItems.find(item => item.key === "mood") as ToolbarItem;
       let moodIndex =  state.toolbarItems.findIndex(item => item.key === "mood");
       mood = {

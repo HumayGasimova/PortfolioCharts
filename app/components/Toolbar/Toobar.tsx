@@ -35,6 +35,8 @@ import {
 
 import * as Lists from '../../Lists';
 import * as Images from '../../constants/images';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import { useTheme } from 'next-themes';
 
 
 type Inputs = {
@@ -50,6 +52,7 @@ export default function Toobar() {
     formState: { errors },
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const {theme, setTheme} = useTheme();
 
   const langDropdownShown = useSelector(
     (state: RootState) => state.portfolio.langDropdownShown,
@@ -100,7 +103,13 @@ export default function Toobar() {
         dispatch(showLangDropdown(!langDropdownShown))
         break;
       case 'mood': 
-        portfolioMood === "light" ?  dispatch(setPortfolioMood("dark")) : dispatch(setPortfolioMood("light"));
+      if(portfolioMood === "light"){
+        setTheme("dark");
+        dispatch(setPortfolioMood("dark")); 
+      }else{
+        setTheme("light");
+        dispatch(setPortfolioMood("light"));
+      }
         break;
     }
   }else{
@@ -236,6 +245,7 @@ const renderImage = (key: string) => {
           </div>
         </div>
         {renderListOfToolbarItems()}
+        dsfdsf
       </div>
     </div>
   )
