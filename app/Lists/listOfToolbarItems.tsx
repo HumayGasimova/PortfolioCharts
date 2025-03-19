@@ -11,7 +11,7 @@ export const listOfToolbarItems = [
         key: "mood",
         type: "icon",
         name: "faMoon",
-        action: ""
+        action: "light"
     },
     {
         id: 3,

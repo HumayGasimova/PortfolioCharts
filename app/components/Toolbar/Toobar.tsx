@@ -15,6 +15,7 @@ import {
   faExpand,
   faGear,
   faSearch,
+  faSun
 } from '@fortawesome/free-solid-svg-icons';
 
 import { 
@@ -28,7 +29,8 @@ import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
 
 import {
   showLangDropdown,
-  setPortfolioLang
+  setPortfolioLang,
+  setPortfolioMood
 } from '../../../lib/slices/portfolioSlice';
 
 import * as Lists from '../../Lists';
@@ -55,6 +57,14 @@ export default function Toobar() {
   const selectedLangKey = useSelector(
     (state: RootState) => state.portfolio.selectedLangKey,
   )
+  const toolbarItems = useSelector(
+    (state: RootState) => state.portfolio.toolbarItems,
+  )
+
+  const portfolioMood = useSelector(
+    (state: RootState) => state.portfolio.portfolioMood,
+  )
+
   const dispatch = useDispatch();
   // const [incrementAmount, setIncrementAmount] = useState('2');
 
@@ -74,13 +84,14 @@ export default function Toobar() {
         return faBars;
       case 'faGear':
         return faGear;
+        case 'faSun':
+          return faSun;
       default:
         return faExclamation;
     }
  }
 
  const onToolbarIconClick = (e: React.MouseEvent, btnKey: string) => {
-  
   if(e.button === 2) return;
 
   if(e.button !== 1){
@@ -88,8 +99,10 @@ export default function Toobar() {
       case 'lang': 
         dispatch(showLangDropdown(!langDropdownShown))
         break;
+      case 'mood': 
+        portfolioMood === "light" ?  dispatch(setPortfolioMood("dark")) : dispatch(setPortfolioMood("light"));
+        break;
     }
-
   }else{
 
   }
@@ -178,7 +191,7 @@ const renderImage = (key: string) => {
     return(
       <>
         <div className={styles.toolbarRightPartWrapper}>
-          {Lists.listOfToolbarItems.map((el, i) => {
+          {toolbarItems.map((el, i) => {
             return(
               <div 
                 key={i}
