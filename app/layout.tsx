@@ -20,14 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="cupcake">
-        <ProviderForTheme>
-       <ReduxProvider>  
-     
-        <body className={inter.className}>{children}</body>
-      
-        
-       </ReduxProvider>
-       </ProviderForTheme>
+      <ReduxProvider>
+        <body className={inter.className}>
+          <ProviderForTheme>
+            {children}
+          </ProviderForTheme>
+        </body>
+      </ReduxProvider>
     </html>
   )
 }

@@ -103,13 +103,13 @@ export default function Toobar() {
         dispatch(showLangDropdown(!langDropdownShown))
         break;
       case 'mood': 
-      if(portfolioMood === "light"){
-        setTheme("dark");
-        dispatch(setPortfolioMood("dark")); 
-      }else{
-        setTheme("light");
-        dispatch(setPortfolioMood("light"));
-      }
+        if(portfolioMood === "light"){
+          setTheme("dark");
+          dispatch(setPortfolioMood("dark")); 
+        }else{
+          setTheme("light");
+          dispatch(setPortfolioMood("light"));
+        }
         break;
     }
   }else{
@@ -163,7 +163,6 @@ const renderDropdowns = () => {
         })}
       </div>
     )
-
   }
   // else if(){
 
@@ -245,7 +244,6 @@ const renderImage = (key: string) => {
           </div>
         </div>
         {renderListOfToolbarItems()}
-        dsfdsf
       </div>
     </div>
   )
