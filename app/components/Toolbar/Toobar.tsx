@@ -25,6 +25,8 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './Toolbar.module.scss';
+
+import '../../globals.scss';
 import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
 
 import {
