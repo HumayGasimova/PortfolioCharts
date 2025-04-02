@@ -28,14 +28,14 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border: 1px solid rgb(223, 223, 223);
+                // border: 1px solid rgb(223, 223, 223);
                 border-radius: 20px;
-                background-color: rgb(236 240 250);
+                // background-color: rgb(236 240 250);
                 padding: 0 15px 0 15px;
                 .searchField {
-                    background-color: rgb(236 240 250);
+                    // background-color: rgb(236 240 250);
                     font-size: 13px;
-                    color: rgb(165, 165, 165);
+                    // color: rgb(165, 165, 165);
                     border-radius: 20px;   
                     border: none;           // margin: 10px
                     &:focus {
@@ -124,4 +124,22 @@
 
 :root[data-theme="dark"] .langName {
     color: white;
+}
+
+:root[data-theme="light"] .searchFieldWrapper {
+    border: 1px solid rgb(223, 223, 223);
+    background-color: rgb(236 240 250);
+    .searchField {
+        background-color: rgb(236 240 250);
+        color: rgb(165, 165, 165); 
+    }
+}
+
+:root[data-theme="dark"] .searchFieldWrapper {
+    border: 1px solid rgb(64, 64, 65);
+    background-color: rgb(25, 32, 47);;
+    .searchField {
+        background-color: rgb(25, 32, 47);;
+        color: rgb(165, 165, 165); 
+    }
 }
