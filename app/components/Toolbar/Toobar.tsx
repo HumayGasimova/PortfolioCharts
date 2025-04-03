@@ -31,9 +31,15 @@ import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
 
 import {
   showLangDropdown,
+  showMessagesDropdown,
   setPortfolioLang,
   setPortfolioMood
 } from '../../../lib/slices/portfolioSlice';
+
+import {
+  readAllMessages
+} from '../../../lib/slices/messagesSlice';
+
 
 import * as Lists from '../../Lists';
 import * as Images from '../../constants/images';
@@ -59,16 +65,23 @@ export default function Toobar() {
   const langDropdownShown = useSelector(
     (state: RootState) => state.portfolio.langDropdownShown,
   )
+  const messagesDropdownShown = useSelector(
+    (state: RootState) => state.portfolio.messagesDropdownShown,
+  )
   const selectedLangKey = useSelector(
     (state: RootState) => state.portfolio.selectedLangKey,
   )
   const toolbarItems = useSelector(
     (state: RootState) => state.portfolio.toolbarItems,
   )
-
   const portfolioMood = useSelector(
     (state: RootState) => state.portfolio.portfolioMood,
   )
+  
+  const messagesList = useSelector(
+    (state: RootState) => state.messages.messagesList,
+  )
+
 
   const dispatch = useDispatch();
   // const [incrementAmount, setIncrementAmount] = useState('2');
@@ -104,6 +117,7 @@ export default function Toobar() {
       case 'lang': 
         dispatch(showLangDropdown(!langDropdownShown))
         break;
+        
       case 'mood': 
         if(portfolioMood === "light"){
           setTheme("dark");
@@ -113,13 +127,16 @@ export default function Toobar() {
           dispatch(setPortfolioMood("light"));
         }
         break;
+      case 'messages': 
+        dispatch(showMessagesDropdown(!messagesDropdownShown))
+        break;
     }
   }else{
 
   }
 }
 
-const loadImg = (key: string) => {
+const loadImg = (key: string, personPhoto: any) => {
   switch(key) {
       case 'azeri':
         return Images.AZERI_FLAG;
@@ -133,14 +150,33 @@ const loadImg = (key: string) => {
         return Images.SPAIN_FLAG;
       case 'profile':
         return Images.PROFILE_FHOTO;
+      case 'person':
+        switch (personPhoto) {
+          case 'personPhoto1':
+            return Images.PERSON_PHOTO_1;
+          case 'personPhoto2':
+            return Images.PERSON_PHOTO_2;
+          case 'personPhoto3':
+            return Images.PERSON_PHOTO_3;
+          case 'personPhoto4':
+            return Images.PERSON_PHOTO_4;
+          case 'personPhoto5':
+            return Images.PERSON_PHOTO_5;
+          default:
+              return Images.NO_PHOTO;
+        }
       default:
-        return Images.UK_FLAG;
+        return Images.NO_IMAGE;
   }
 }
 
 const changeLang = (key: string) => {
   dispatch(showLangDropdown(false));
   dispatch(setPortfolioLang(key));
+}
+
+const readAllMessagesBtnHandler = () => {
+  dispatch(readAllMessages());
 }
 
 const renderDropdowns = () => {
@@ -151,7 +187,7 @@ const renderDropdowns = () => {
           return(
             <div key={el.id} className={styles.langWrapper} onClick={()=> changeLang(el.key)}>
                <Image 
-                src={loadImg(el.key)}
+                src={loadImg(el.key, null)}
                 alt={el.key}
                 width={23}
                 height={23}
@@ -166,9 +202,35 @@ const renderDropdowns = () => {
       </div>
     )
   }
-  // else if(){
-
-  // }
+  else if(messagesDropdownShown){
+    return(
+      <div className={styles.messagesDropdownWrapper}>
+        <div className={styles.messagesHeader}>
+          <div>
+            <div className={styles.header}>Messages</div>
+            <div className={styles.unreadMessages}>You have {messagesList.length} unread messages</div>
+          </div>
+          <div className={styles.headerBtn} onClick={readAllMessagesBtnHandler}>Mark All Read</div>
+        </div>
+        {messagesList.map((el: any) => {
+          return(
+            <div key={el.id} className={styles.messagesWrapper} onClick={()=> changeLang(el.key)}>
+              <Image 
+                src={loadImg(el.key, el.photo)}
+                alt={el.key}
+                className={styles.photo}
+              />
+              <div>
+                <div className={styles.fullname}>{el.fullName}</div>
+                <div className={styles.message}>{el.message}</div>
+                <div className={styles.date}>{el.date}</div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 }
 const renderImage = (key: string) => {
   switch(key){
@@ -176,7 +238,7 @@ const renderImage = (key: string) => {
     return(
       <div className={styles.toolbarImageWrapper}>
         <Image 
-          src={loadImg(selectedLangKey)}
+          src={loadImg(selectedLangKey, null)}
           alt={key}
           width={23}
           height={23}
@@ -187,7 +249,7 @@ const renderImage = (key: string) => {
     case "profile":
       return(<div className={styles.toolbarImageWrapper} style={{width: "36px", height: "36px"}}>
         <Image 
-            src={loadImg(key)}
+            src={loadImg(key, null)}
             alt={key}
             quality={100}
         />

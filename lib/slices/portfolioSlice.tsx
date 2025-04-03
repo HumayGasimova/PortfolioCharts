@@ -12,6 +12,7 @@ export const portfolioSlice = createSlice({
   name: 'portfolio',
   initialState: {
     langDropdownShown: false,
+    messagesDropdownShown: false,
     selectedLangKey: "azeri",
     portfolioMood: "light",
     toolbarItems: [
@@ -76,6 +77,11 @@ export const portfolioSlice = createSlice({
   reducers: {
     showLangDropdown: (state, action) => {
       state.langDropdownShown = action.payload;
+      state.messagesDropdownShown = false;
+    },
+    showMessagesDropdown: (state, action) => {
+      state.messagesDropdownShown = action.payload;
+      state.langDropdownShown = false;
     },
     setPortfolioLang: (state, action) => {
       state.selectedLangKey = action.payload;
@@ -95,6 +101,6 @@ export const portfolioSlice = createSlice({
   },
 })
 
-export const { showLangDropdown, setPortfolioLang, setPortfolioMood } = portfolioSlice.actions
+export const { showLangDropdown, showMessagesDropdown, setPortfolioLang, setPortfolioMood } = portfolioSlice.actions
 
 export default portfolioSlice.reducer

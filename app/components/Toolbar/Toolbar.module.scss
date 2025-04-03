@@ -75,7 +75,7 @@
                 border-radius: 5px;
                 // background-color: white;
                 box-shadow: 0px 1px 1px rgba(0, 0 ,0, .1);
-                overflow: auto;
+                overflow-y: scroll;
                 .langWrapper {
                     display: flex;
                     justify-content: start;
@@ -92,6 +92,73 @@
                     // }
                 }
             }
+            .messagesDropdownWrapper {
+                position: fixed;
+                top: 60px;
+                right: 240px;
+                width: 300px;
+                height: 340px;
+                // border: 1px solid rgb(223, 223, 223);
+                border-radius: 5px;
+                // background-color: white;
+                box-shadow: 0px 1px 1px rgba(0, 0 ,0, .1);
+                overflow-y: scroll;
+                .messagesHeader {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: start;
+                    background-color: rgb(1, 98, 232);
+                    padding: 15px;
+                    .header {
+                        font-size: 14px;
+                        font-weight: bold;
+                        font-family: "Open Sans", sans-serif;
+                    }
+                    .unreadMessages {
+                        font-size: 11px;
+                        font-family: "Open Sans", sans-serif;
+                    }
+                    .headerBtn {
+                        border-radius: 15px;
+                        background-color: rgb(251, 188, 11);
+                        font-weight: bold;
+                        font-size: 11px;
+                        font-family: "Open Sans", sans-serif;
+                        padding: 2px 6px 2px 6px;
+                        color: rgb(53, 53, 53);
+                        cursor: pointer;
+                    }
+                }
+                .messagesWrapper {
+                    display: flex;
+                    justify-content: start;
+                    align-items: start;
+                    padding: 10px;
+                    cursor: pointer;
+                    .photo {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                    }
+                    .fullname {
+                        font-size: 14px;
+                        font-family: "Open Sans", sans-serif;
+                    }
+                    .message {
+                        font-size: 11px;
+                        font-family: "Open Sans", sans-serif;
+                        color: rgb(128, 128, 128);
+                    }
+                    .date {
+                        font-size: 11px;
+                        font-family: "Open Sans", sans-serif;
+                        color: rgb(128, 128, 128);
+                    }
+                }
+            }
+            
+           
         }
     }
 }
@@ -122,6 +189,24 @@
     background-color: rgb(236 240 250);
 }
 
+:root[data-theme="dark"] .messagesDropdownWrapper {
+    background-color: rgb(36, 43, 57);
+    border: 1px solid rgb(64, 64, 65);
+}
+
+:root[data-theme="light"] .messagesDropdownWrapper {
+    background-color: white;
+    border: 1px solid rgb(223, 223, 223);
+}
+
+:root[data-theme="dark"] .messagesWrapper:hover{
+    background-color: rgba(51, 56, 82, 0.5);
+}
+
+:root[data-theme="light"] .messagesWrapper:hover {
+    background-color: rgb(236 240 250);
+}
+
 :root[data-theme="dark"] .langName {
     color: white;
 }
@@ -139,7 +224,23 @@
     border: 1px solid rgb(64, 64, 65);
     background-color: rgb(25, 32, 47);;
     .searchField {
-        background-color: rgb(25, 32, 47);;
+        background-color: rgb(25, 32, 47);
         color: rgb(165, 165, 165); 
     }
+}
+
+:root[data-theme="light"] .messagesWrapper:not(:last-child) {
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+:root[data-theme="dark"] .messagesWrapper:not(:last-child) {
+    border-bottom: 1px solid rgb(64, 64, 65);
+}
+
+:root[data-theme="light"] .fullname {
+    color: black;
+}
+
+:root[data-theme="dark"] .fullname {
+    color: white;
 }
