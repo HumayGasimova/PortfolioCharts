@@ -72,7 +72,7 @@
                 width: 150px;
                 height: 170px;
                 // border: 1px solid rgb(223, 223, 223);
-                border-radius: 5px;
+                border-radius: 7px;
                 // background-color: white;
                 box-shadow: 0px 1px 1px rgba(0, 0 ,0, .1);
                 overflow-y: scroll;
@@ -93,76 +93,118 @@
                     // }
                 }
             }
-            .messagesDropdownWrapper {
+            .messagesDropdownArrow {
                 position: fixed;
-                top: 60px;
-                right: 240px;
+                top: 60px; //60
+                right: 235px;
                 width: 300px;
                 height: 340px;
-                // border: 1px solid rgb(223, 223, 223);
-                border-radius: 5px;
-                // background-color: white;
+                border-radius: 7px;
                 box-shadow: 0px 1px 1px rgba(0, 0 ,0, .1);
-                overflow-y: scroll;
-                scrollbar-width: none;
-                .messagesHeader {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: start;
-                    background-color: rgb(1, 98, 232);
-                    padding: 15px;
-                    .header {
-                        font-size: 14px;
-                        font-weight: bold;
-                        font-family: "Open Sans", sans-serif;
+                .messagesDropdownWrapper {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    overflow-y: scroll;
+                    scrollbar-width: none;
+                    border-radius: 7px;
+                    border: none;
+                    .messagesHeader {
+                        position: fixed;
+                        display: flex;
+                        width: 298px;
+                        justify-content: space-around;
+                        align-items: start;
+                        background-color: rgb(1, 98, 232);
+                        padding: 15px;
+                        border-top-right-radius: 7px;
+                        border-top-left-radius: 7px;
+                        z-index: 1;
+                        .header {
+                            font-size: 14px;
+                            font-weight: bold;
+                            font-family: "Open Sans", sans-serif;
+                        }
+                        .unreadMessages {
+                            font-size: 11px;
+                            font-family: "Open Sans", sans-serif;
+                        }
+                        .headerBtn {
+                            border-radius: 15px;
+                            background-color: rgb(251, 188, 11);
+                            font-weight: bold;
+                            font-size: 11px;
+                            font-family: "Open Sans", sans-serif;
+                            padding: 2px 6px 2px 6px;
+                            color: rgb(53, 53, 53);
+                            cursor: pointer;
+                        }
                     }
-                    .unreadMessages {
-                        font-size: 11px;
-                        font-family: "Open Sans", sans-serif;
+                    .messagesWrapper {
+                        position: relative;
+                        top: 67px;
+                        .messageWrapper {
+                            display: flex;
+                            justify-content: start;
+                            align-items: start;
+                            padding: 10px;
+                            cursor: pointer;
+                            .photo {
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 50%;
+                                margin-right: 10px;
+                            }
+                            .fullname {
+                                font-size: 14px;
+                                font-family: "Open Sans", sans-serif;
+                            }
+                            .message {
+                                font-size: 11px;
+                                font-family: "Open Sans", sans-serif;
+                                color: rgb(128, 128, 128);
+                            }
+                            .date {
+                                font-size: 11px;
+                                font-family: "Open Sans", sans-serif;
+                                color: rgb(128, 128, 128);
+                                font-weight: bold;
+                            }
+                        }
                     }
-                    .headerBtn {
-                        border-radius: 15px;
-                        background-color: rgb(251, 188, 11);
-                        font-weight: bold;
-                        font-size: 11px;
-                        font-family: "Open Sans", sans-serif;
-                        padding: 2px 6px 2px 6px;
-                        color: rgb(53, 53, 53);
-                        cursor: pointer;
-                    }
-                }
-                .messagesWrapper {
-                    display: flex;
-                    justify-content: start;
-                    align-items: start;
-                    padding: 10px;
-                    cursor: pointer;
-                    .photo {
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        margin-right: 10px;
-                    }
-                    .fullname {
-                        font-size: 14px;
-                        font-family: "Open Sans", sans-serif;
-                    }
-                    .message {
-                        font-size: 11px;
-                        font-family: "Open Sans", sans-serif;
-                        color: rgb(128, 128, 128);
-                    }
-                    .date {
-                        font-size: 11px;
-                        font-family: "Open Sans", sans-serif;
-                        color: rgb(128, 128, 128);
-                        font-weight: bold;
-                    }
+                   
                 }
             }
+            
+           
+            .messagesDropdownArrow:before {
+                bottom: 100%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+            .messagesDropdownArrow:after {
+                border-bottom-color: #ffffff;
+                border-width: 19px;
+                left: 96%;
+                margin-left: -19px;
+                background-color: rgb(1, 98, 232);
+              }
+              
+              .messagesDropdownArrow:before {
+                border-bottom-color: rgb(1, 98, 232);
+                border-width: 8px;
+                left: 96%;
+                margin-left: -20px;
+              }
         }
     }
 }
+
+
 
 :root[data-theme="dark"] .toolbarContainerWrapper {
     background-color: rgb(25, 32, 47);
@@ -200,11 +242,11 @@
     border: 1px solid rgb(223, 223, 223);
 }
 
-:root[data-theme="dark"] .messagesWrapper:hover{
+:root[data-theme="dark"] .messageWrapper:hover{
     background-color: rgba(51, 56, 82, 0.5);
 }
 
-:root[data-theme="light"] .messagesWrapper:hover {
+:root[data-theme="light"] .messageWrapper:hover {
     background-color: rgb(236 240 250);
 }
 
@@ -230,11 +272,11 @@
     }
 }
 
-:root[data-theme="light"] .messagesWrapper:not(:last-child) {
+:root[data-theme="light"] .messageWrapper:not(:last-child) {
     border-bottom: 1px solid rgb(223, 223, 223);
 }
 
-:root[data-theme="dark"] .messagesWrapper:not(:last-child) {
+:root[data-theme="dark"] .messageWrapper:not(:last-child) {
     border-bottom: 1px solid rgb(64, 64, 65);
 }
 
