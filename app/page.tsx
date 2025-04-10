@@ -1,6 +1,6 @@
 "use client";
 
-import Toolbar from "./components/Toolbar/Toobar";
+import Toolbar from "./components/Toolbar/Toolbar";
 
 export default function Home() {
   
