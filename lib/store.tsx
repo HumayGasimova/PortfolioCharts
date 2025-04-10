@@ -5,6 +5,14 @@ import employersSliceReducers from "./slices/employerSlice";
 import counterSliceReducers from "./slices/counterSlice";
 import portfolioReducer from "./slices/portfolioSlice";
 import messagesReducer from "./slices/messagesSlice";
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import * as Epic from './epics'
+
+const epicMiddleware = createEpicMiddleware();
+
+export const rootEpic = combineEpics(
+    Epic.startClickingMessagesIconEpic
+  );
 
 export const store = configureStore({
     reducer: {
@@ -16,12 +24,16 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(
-            // [
+        [
             jsonPlaceholderApi.middleware,
-        // ]
+            epicMiddleware
+        ]
     )
 });
+
+epicMiddleware.run(rootEpic);
 
 setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>
+// export default store;

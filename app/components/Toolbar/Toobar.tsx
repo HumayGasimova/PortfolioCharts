@@ -33,7 +33,8 @@ import {
   showLangDropdown,
   showMessagesDropdown,
   setPortfolioLang,
-  setPortfolioMood
+  setPortfolioMood,
+  startClickingMessagesIcon,
 } from '../../../lib/slices/portfolioSlice';
 
 import {
@@ -60,7 +61,7 @@ export default function Toobar() {
     formState: { errors },
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  const [messagesHeaderHeight, setMessagesHeaderHeight] = useState(0);
+  // const [messagesHeaderHeight, setMessagesHeaderHeight] = useState(0);
   const {theme, setTheme} = useTheme();
 
   const langDropdownShown = useSelector(
@@ -81,6 +82,10 @@ export default function Toobar() {
   
   const messagesList = useSelector(
     (state: RootState) => state.messages.messagesList,
+  )
+
+  const messagesHeaderHeight = useSelector(
+    (state: RootState) => state.portfolio.messagesHeaderHeight,
   )
 
 //   useEffect(()=>{
@@ -130,7 +135,16 @@ export default function Toobar() {
         }
         break;
       case 'messages':
+        // if(){
+        setTimeout(()=>{
+          dispatch(startClickingMessagesIcon());
+        }, 0.001)
+         
+        // }
+    
         dispatch(showMessagesDropdown(!messagesDropdownShown));
+      
+        
         break;
     }
   }else{
@@ -205,9 +219,7 @@ export default function Toobar() {
       )
     }
     else if(messagesDropdownShown){
-      let messagesHeader = document.getElementById("messagesHeader") as HTMLElement;
-      // setMessagesHeaderHeight(messagesHeader?.offsetHeight);
-      console.log("messagesHeaderHeight",messagesHeaderHeight)
+     
       return(
         <div className={styles.messagesDropdownArrow}>
           <div className={styles.messagesDropdownWrapper}>
@@ -220,7 +232,7 @@ export default function Toobar() {
             </div>
             <div 
             className={styles.messagesWrapper} 
-            // style={{top: `${messagesHeader?.offsetHeight}px`}}
+            style={{top: `${messagesHeaderHeight}px`}}
             >
               {messagesList.map((el: any) => {
                 return(

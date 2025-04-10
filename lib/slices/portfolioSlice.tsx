@@ -15,6 +15,7 @@ export const portfolioSlice = createSlice({
     messagesDropdownShown: false,
     selectedLangKey: "azeri",
     portfolioMood: "light",
+    messagesHeaderHeight: 0,
     toolbarItems: [
       {
         id: 1,
@@ -98,9 +99,13 @@ export const portfolioSlice = createSlice({
       state.portfolioMood = action.payload;
       state.toolbarItems.splice(1,moodIndex,mood);
     },
+    setMessagesHeaderHeight: (state, action) => {
+      state.messagesHeaderHeight = action.payload;
+    },
+    startClickingMessagesIcon: (state) => {}
   },
 })
 
-export const { showLangDropdown, showMessagesDropdown, setPortfolioLang, setPortfolioMood } = portfolioSlice.actions
+export const { showLangDropdown, showMessagesDropdown, setPortfolioLang, setPortfolioMood, setMessagesHeaderHeight, startClickingMessagesIcon } = portfolioSlice.actions
 
 export default portfolioSlice.reducer
