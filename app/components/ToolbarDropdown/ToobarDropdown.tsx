@@ -97,7 +97,7 @@ export default function ToolbarDropdown(props: any) {
                   alt={el.key}
                   className={styles.photo}
                 />
-                <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(250, 49, 35)"}}/>
+                <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/>
                 <div>
                   <div className={styles.fullname}>{el.fullName}</div>
                   <div className={styles.message}>{el.message.substring(0, 52)}......</div>
