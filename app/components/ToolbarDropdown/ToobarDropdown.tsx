@@ -108,7 +108,7 @@ export default function ToolbarDropdown(props: any) {
         </div>
       </div>
       <div className={styles.messagesFooter}>
-          <div onClick={showChatPage}>VIEW ALL</div>
+          <div className={styles.viewAllbtn} onClick={showChatPage}>VIEW ALL</div>
       </div>
   </div>
   )
