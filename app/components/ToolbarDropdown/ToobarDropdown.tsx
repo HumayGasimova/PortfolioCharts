@@ -71,6 +71,10 @@ export default function ToolbarDropdown(props: any) {
     dispatch(readAllMessages());
   }
 
+  const showChatPage = () => {
+    console.log("Redirect to chat page")
+  }
+
   return (
     <div className={styles.messagesDropdownArrow}>
       <div className={styles.messagesDropdownWrapper}>
@@ -82,8 +86,8 @@ export default function ToolbarDropdown(props: any) {
           <div className={styles.headerBtn} onClick={readAllMessagesBtnHandler}>Mark All Read</div>
         </div>
         <div 
-        className={styles.messagesWrapper} 
-        style={{top: `${messagesHeaderHeight}px`}}
+          className={styles.messagesWrapper} 
+          style={{top: `${messagesHeaderHeight}px`}}
         >
           {props.list.map((el: any) => {
             return(
@@ -102,6 +106,9 @@ export default function ToolbarDropdown(props: any) {
             )
           })}
         </div>
+      </div>
+      <div className={styles.messagesFooter}>
+          <div onClick={showChatPage}>VIEW ALL</div>
       </div>
   </div>
   )
