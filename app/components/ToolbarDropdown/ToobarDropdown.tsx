@@ -95,7 +95,7 @@ export default function ToolbarDropdown(props: any) {
                 />
                 <div>
                   <div className={styles.fullname}>{el.fullName}</div>
-                  <div className={styles.message}>{el.message}</div>
+                  <div className={styles.message}>{el.message.substring(0, 52)}......</div>
                   <div className={styles.date}>{el.date}</div>
                 </div>
               </div>
