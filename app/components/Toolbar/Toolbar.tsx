@@ -32,9 +32,11 @@ import MenuIcon from '../SmallComponents/MenuIcon/MenuIcon';
 import {
   showLangDropdown,
   showMessagesDropdown,
+  showNotificationsDropdown,
   setPortfolioLang,
   setPortfolioMood,
   startClickingMessagesIcon,
+  startClickingNotificationsIcon
 } from '../../../lib/slices/portfolioSlice';
 
 import {
@@ -67,27 +69,35 @@ export default function Toolbar() {
 
   const langDropdownShown = useSelector(
     (state: RootState) => state.portfolio.langDropdownShown,
-  )
+  );
   const messagesDropdownShown = useSelector(
     (state: RootState) => state.portfolio.messagesDropdownShown,
-  )
+  );
+  const notificationsDropdownShown = useSelector(
+    (state: RootState) => state.portfolio.notificationsDropdownShown,
+  );
+  
   const selectedLangKey = useSelector(
     (state: RootState) => state.portfolio.selectedLangKey,
-  )
+  );
   const toolbarItems = useSelector(
     (state: RootState) => state.portfolio.toolbarItems,
-  )
+  );
   const portfolioMood = useSelector(
     (state: RootState) => state.portfolio.portfolioMood,
-  )
+  );
   
   const messagesList = useSelector(
     (state: RootState) => state.messages.messagesList,
-  )
+  );
+
+  const notificationsList = useSelector(
+    (state: RootState) => state.notifications.notificationsList,
+  );
 
   const messagesHeaderHeight = useSelector(
     (state: RootState) => state.portfolio.messagesHeaderHeight,
-  )
+  );
 
 //   useEffect(()=>{
 // console.log("messagesHeaderHeight",messagesHeaderHeight)
@@ -136,16 +146,18 @@ export default function Toolbar() {
         }
         break;
       case 'messages':
-        // if(){
         setTimeout(()=>{
           dispatch(startClickingMessagesIcon());
         }, 0.001)
-         
-        // }
-    
         dispatch(showMessagesDropdown(!messagesDropdownShown));
+        break;
+      case 'notifications':
+        setTimeout(()=>{
+          dispatch(startClickingNotificationsIcon());
+        }, 0.001)
+    
+        dispatch(showNotificationsDropdown(!notificationsDropdownShown));
       
-        
         break;
     }
   }else{
@@ -220,13 +232,20 @@ export default function Toolbar() {
       )
     }
     else if(messagesDropdownShown){
-     
       return(
         <ToolbarDropdown
           key="messagesDropdown"
           header="Messages"
           list={messagesList}
-
+        />
+      )
+    }
+    else if(notificationsDropdownShown){
+      return(
+        <ToolbarDropdown
+          key="notificationsDropdown"
+          header="Notifications"
+          list={notificationsList}
         />
       )
     }

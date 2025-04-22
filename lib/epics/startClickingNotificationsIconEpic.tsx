@@ -17,7 +17,7 @@ import {
  */
 
 import {
-    startClickingMessagesIcon,
+    startClickingNotificationsIcon,
     setMessagesHeaderHeight
   } from '../slices/portfolioSlice';
 
@@ -31,14 +31,14 @@ import {
  * Epic
  */
 
-export const startClickingMessagesIconEpic = (action$: any ) => //, state$, dependencies$
+export const startClickingNotificationsIconEpic = (action$: any ) => //, state$, dependencies$
     action$.pipe(
-        filter(startClickingMessagesIcon.match),
+        filter(startClickingNotificationsIcon.match),
         take(1),
         mergeMap(action => {
-            let messagesHeaderHeight = document.getElementById("messagesHeader")?.offsetHeight;          
+            let notificationsHeaderHeight = document.getElementById("notificationsHeader")?.offsetHeight;          
                 return of(
-                    setMessagesHeaderHeight(messagesHeaderHeight)
+                    setMessagesHeaderHeight(notificationsHeaderHeight)
                 )
                 // .pipe(
                 //     delay(1000)
@@ -47,4 +47,4 @@ export const startClickingMessagesIconEpic = (action$: any ) => //, state$, depe
         )
     )
 
-export default startClickingMessagesIconEpic;
+export default startClickingNotificationsIconEpic;

@@ -13,6 +13,7 @@ export const portfolioSlice = createSlice({
   initialState: {
     langDropdownShown: false,
     messagesDropdownShown: false,
+    notificationsDropdownShown: false,
     selectedLangKey: "azeri",
     portfolioMood: "light",
     messagesHeaderHeight: 0,
@@ -79,9 +80,16 @@ export const portfolioSlice = createSlice({
     showLangDropdown: (state, action) => {
       state.langDropdownShown = action.payload;
       state.messagesDropdownShown = false;
+      state.notificationsDropdownShown = false;
     },
     showMessagesDropdown: (state, action) => {
       state.messagesDropdownShown = action.payload;
+      state.langDropdownShown = false;
+      state.notificationsDropdownShown = false;
+    },
+    showNotificationsDropdown: (state, action) => {
+      state.notificationsDropdownShown = action.payload;
+      state.messagesDropdownShown = false;
       state.langDropdownShown = false;
     },
     setPortfolioLang: (state, action) => {
@@ -102,10 +110,20 @@ export const portfolioSlice = createSlice({
     setMessagesHeaderHeight: (state, action) => {
       state.messagesHeaderHeight = action.payload;
     },
-    startClickingMessagesIcon: (state) => {}
+    startClickingMessagesIcon: (state) => {},
+    startClickingNotificationsIcon: (state) => {}
   },
 })
 
-export const { showLangDropdown, showMessagesDropdown, setPortfolioLang, setPortfolioMood, setMessagesHeaderHeight, startClickingMessagesIcon } = portfolioSlice.actions
+export const { 
+  showLangDropdown, 
+  showMessagesDropdown, 
+  showNotificationsDropdown, 
+  setPortfolioLang, 
+  setPortfolioMood, 
+  setMessagesHeaderHeight, 
+  startClickingMessagesIcon, 
+  startClickingNotificationsIcon 
+} = portfolioSlice.actions
 
 export default portfolioSlice.reducer

@@ -5,6 +5,8 @@ import employersSliceReducers from "./slices/employerSlice";
 import counterSliceReducers from "./slices/counterSlice";
 import portfolioReducer from "./slices/portfolioSlice";
 import messagesReducer from "./slices/messagesSlice";
+import notificationsReducer from "./slices/notificationsSlice";
+
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import * as Epic from './epics'
 
@@ -20,7 +22,8 @@ export const store = configureStore({
         employers: employersSliceReducers,
         counter: counterSliceReducers,
         portfolio: portfolioReducer,
-        messages: messagesReducer
+        messages: messagesReducer,
+        notifications: notificationsReducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(

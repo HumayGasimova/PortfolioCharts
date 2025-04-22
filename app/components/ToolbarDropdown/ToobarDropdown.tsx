@@ -90,21 +90,39 @@ export default function ToolbarDropdown(props: any) {
           style={{top: `${messagesHeaderHeight}px`}}
         >
           {props.list.map((el: any) => {
-            return(
-              <div key={el.id} className={styles.messageWrapper} onClick={()=> changeLang(el.key)}>
-                <Image 
-                  src={loadImg(el.key, el.photo)}
-                  alt={el.key}
-                  className={styles.photo}
-                />
-                <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/>
-                <div>
-                  <div className={styles.fullname}>{el.fullName}</div>
-                  <div className={styles.message}>{el.message.substring(0, 52)}......</div>
-                  <div className={styles.date}>{el.date}</div>
+            if(props.key === "messagesDropdown"){
+              return(
+                <div key={el.id} className={styles.messageWrapper} onClick={()=> changeLang(el.key)}>
+                  <Image 
+                    src={loadImg(el.key, el.photo)}
+                    alt={el.key}
+                    className={styles.photo}
+                  />
+                  <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/>
+                  <div>
+                    <div className={styles.fullname}>{el.fullName}</div>
+                    <div className={styles.message}>{el.message.substring(0, 52)}......</div>
+                    <div className={styles.date}>{el.date}</div>
+                  </div>
                 </div>
-              </div>
-            )
+              )
+            }else if(props.key === "notificationsDropdown"){
+              return(
+                <div key={el.id} className={styles.messageWrapper} onClick={()=> changeLang(el.key)}>
+                  {/* <Image 
+                    src={loadImg(el.key, el.photo)}
+                    alt={el.key}
+                    className={styles.photo}
+                  />
+                  <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/>
+                  <div>
+                    <div className={styles.fullname}>{el.fullName}</div>
+                    <div className={styles.message}>{el.message.substring(0, 52)}......</div>
+                    <div className={styles.date}>{el.date}</div>
+                  </div> */}
+                </div>
+              )
+            }
           })}
         </div>
       </div>
