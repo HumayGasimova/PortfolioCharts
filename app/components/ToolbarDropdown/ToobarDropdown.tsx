@@ -17,6 +17,16 @@ import {
 
 import * as Lists from '../../Lists';
 import * as Images from '../../constants/images';
+import { 
+  faExclamation, 
+  faFileLines,
+  faGem,
+  faPizzaSlice,
+  faEnvelope,
+  faUserCheck,
+  faCircleCheck
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default function ToolbarDropdown(props: any) {  
@@ -24,6 +34,11 @@ export default function ToolbarDropdown(props: any) {
   const messagesHeaderHeight = useSelector(
     (state: RootState) => state.portfolio.messagesHeaderHeight,
   )
+
+  const notificationsHeaderHeight = useSelector(
+    (state: RootState) => state.portfolio.notificationsHeaderHeight,
+  )
+
 
   const dispatch = useDispatch();
 
@@ -62,9 +77,10 @@ export default function ToolbarDropdown(props: any) {
     }
   }
 
-  const changeLang = (key: string) => {
-    dispatch(showLangDropdown(false));
-    dispatch(setPortfolioLang(key));
+  const onItemClick = (key: string) => {
+    
+    // dispatch(showLangDropdown(false));
+    // dispatch(setPortfolioLang(key));
   }
 
   const readAllMessagesBtnHandler = () => {
@@ -75,10 +91,60 @@ export default function ToolbarDropdown(props: any) {
     console.log("Redirect to chat page")
   }
 
+  const setRightPosition = () => {
+      switch(props.iconKey){
+        case "messagesDropdown":
+          return "235px";
+        case "notificationsDropdown":
+          return "200px";
+        default:
+            return 0;
+      }
+  }
+
+  const setMessagesHeaderHeight = (key: string) => {
+    switch(key){
+      case "messagesDropdown":
+        return `${messagesHeaderHeight}px`;
+      case "notificationsDropdown":
+        return `${notificationsHeaderHeight}px`;
+      default:
+        return 0;
+    }
+  }
+
+  const setElemenyId = (key: string) => {
+    switch(key){
+      case "messagesDropdown":
+        return "messagesHeader";
+      case "notificationsDropdown":
+        return "notificationsHeader";
+    }
+  }
+
+  const setIconName = (opt: string) => {
+     switch(opt){
+       case 'faFileLines':
+         return faFileLines;
+      case 'faGem':
+        return faGem;
+      case 'faPizzaSlice':
+        return faPizzaSlice;
+      case 'faEnvelope':
+        return faEnvelope;
+      case 'faUserCheck':
+        return faUserCheck;
+      case 'faCircleCheck':
+        return faCircleCheck;
+       default:
+         return faExclamation;
+     }
+  }
+
   return (
-    <div className={styles.messagesDropdownArrow}>
-      <div className={styles.messagesDropdownWrapper}>
-        <div className={styles.messagesHeader} id="messagesHeader">
+    <div className={styles.dropdownArrow} style={{right: setRightPosition()}}>
+      <div className={styles.dropdownWrapper}>
+        <div className={styles.dropdownHeader} id={setElemenyId(props.iconKey)}>
           <div>
             <div className={styles.header}>{props.header}</div>
             <div className={styles.unreadMessages}>You have {props.list.length} unread messages</div>
@@ -86,13 +152,13 @@ export default function ToolbarDropdown(props: any) {
           <div className={styles.headerBtn} onClick={readAllMessagesBtnHandler}>Mark All Read</div>
         </div>
         <div 
-          className={styles.messagesWrapper} 
-          style={{top: `${messagesHeaderHeight}px`}}
+          className={styles.dropdownItemWrapper} 
+          style={{top: setMessagesHeaderHeight(props.iconKey)}}
         >
           {props.list.map((el: any) => {
-            if(props.key === "messagesDropdown"){
+            if(props.iconKey === "messagesDropdown"){
               return(
-                <div key={el.id} className={styles.messageWrapper} onClick={()=> changeLang(el.key)}>
+                <div key={el.id} className={styles.messageWrapper} onClick={()=> onItemClick(el.key)}>
                   <Image 
                     src={loadImg(el.key, el.photo)}
                     alt={el.key}
@@ -106,20 +172,20 @@ export default function ToolbarDropdown(props: any) {
                   </div>
                 </div>
               )
-            }else if(props.key === "notificationsDropdown"){
+            }else if(props.iconKey === "notificationsDropdown"){
               return(
-                <div key={el.id} className={styles.messageWrapper} onClick={()=> changeLang(el.key)}>
-                  {/* <Image 
-                    src={loadImg(el.key, el.photo)}
-                    alt={el.key}
-                    className={styles.photo}
-                  />
-                  <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/>
+                <div key={el.id} className={styles.notificationWrapper} onClick={()=> onItemClick(el.key)}>
+                   <FontAwesomeIcon 
+                      icon={setIconName(el.icon)}
+                      color={setIconName(el.icon) === faExclamation ? 'red' : 'rgb(165, 165, 165)'}
+                      size='lg'
+                    />
+                  {/* <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/> */}
                   <div>
-                    <div className={styles.fullname}>{el.fullName}</div>
+                    {/* <div className={styles.fullname}>{el.fullName}</div>
                     <div className={styles.message}>{el.message.substring(0, 52)}......</div>
-                    <div className={styles.date}>{el.date}</div>
-                  </div> */}
+                    <div className={styles.date}>{el.date}</div> */}
+                  </div>
                 </div>
               )
             }

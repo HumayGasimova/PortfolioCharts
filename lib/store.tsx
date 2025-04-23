@@ -13,7 +13,8 @@ import * as Epic from './epics'
 const epicMiddleware = createEpicMiddleware();
 
 export const rootEpic = combineEpics(
-    Epic.startClickingMessagesIconEpic
+    Epic.startClickingMessagesIconEpic,
+    Epic.startClickingNotificationsIconEpic
   );
 
 export const store = configureStore({

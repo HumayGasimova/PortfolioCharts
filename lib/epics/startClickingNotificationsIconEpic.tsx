@@ -18,7 +18,7 @@ import {
 
 import {
     startClickingNotificationsIcon,
-    setMessagesHeaderHeight
+    setNotificationsHeaderHeight
   } from '../slices/portfolioSlice';
 
 /**
@@ -36,9 +36,10 @@ export const startClickingNotificationsIconEpic = (action$: any ) => //, state$,
         filter(startClickingNotificationsIcon.match),
         take(1),
         mergeMap(action => {
-            let notificationsHeaderHeight = document.getElementById("notificationsHeader")?.offsetHeight;          
+            let notificationsHeaderHeight = document.getElementById("notificationsHeader")?.offsetHeight;
+            console.log("notifications", notificationsHeaderHeight)
                 return of(
-                    setMessagesHeaderHeight(notificationsHeaderHeight)
+                    setNotificationsHeaderHeight(notificationsHeaderHeight)
                 )
                 // .pipe(
                 //     delay(1000)

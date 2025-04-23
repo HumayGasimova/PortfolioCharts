@@ -36,7 +36,8 @@ export const startClickingMessagesIconEpic = (action$: any ) => //, state$, depe
         filter(startClickingMessagesIcon.match),
         take(1),
         mergeMap(action => {
-            let messagesHeaderHeight = document.getElementById("messagesHeader")?.offsetHeight;          
+            let messagesHeaderHeight = document.getElementById("messagesHeader")?.offsetHeight;
+            console.log("messages", messagesHeaderHeight)
                 return of(
                     setMessagesHeaderHeight(messagesHeaderHeight)
                 )

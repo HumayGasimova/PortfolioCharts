@@ -64,7 +64,6 @@ export default function Toolbar() {
     formState: { errors },
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  // const [messagesHeaderHeight, setMessagesHeaderHeight] = useState(0);
   const {theme, setTheme} = useTheme();
 
   const langDropdownShown = useSelector(
@@ -95,13 +94,6 @@ export default function Toolbar() {
     (state: RootState) => state.notifications.notificationsList,
   );
 
-  const messagesHeaderHeight = useSelector(
-    (state: RootState) => state.portfolio.messagesHeaderHeight,
-  );
-
-//   useEffect(()=>{
-// console.log("messagesHeaderHeight",messagesHeaderHeight)
-//   }, [])
   const dispatch = useDispatch();
 
  const setIconName = (opt: string) => {
@@ -128,6 +120,7 @@ export default function Toolbar() {
  }
 
  const onToolbarIconClick = (e: React.MouseEvent, btnKey: string) => {
+  
   if(e.button === 2) return;
 
   if(e.button !== 1){
@@ -234,7 +227,7 @@ export default function Toolbar() {
     else if(messagesDropdownShown){
       return(
         <ToolbarDropdown
-          key="messagesDropdown"
+          iconKey="messagesDropdown"
           header="Messages"
           list={messagesList}
         />
@@ -243,7 +236,7 @@ export default function Toolbar() {
     else if(notificationsDropdownShown){
       return(
         <ToolbarDropdown
-          key="notificationsDropdown"
+          iconKey="notificationsDropdown"
           header="Notifications"
           list={notificationsList}
         />
