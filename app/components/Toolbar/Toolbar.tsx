@@ -64,6 +64,9 @@ export default function Toolbar() {
     formState: { errors },
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  let messagesHeaderTimeout: number;
+  let notificationsHeaderTimeout: number;
+
   const {theme, setTheme} = useTheme();
 
   const langDropdownShown = useSelector(
@@ -95,6 +98,17 @@ export default function Toolbar() {
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+  
+
+    return () => {
+        // Cleaning the unmounted component
+
+        clearTimeout(messagesHeaderTimeout);
+        clearTimeout(notificationsHeaderTimeout);
+    }
+}, []);
 
  const setIconName = (opt: string) => {
     switch(opt){
@@ -139,18 +153,16 @@ export default function Toolbar() {
         }
         break;
       case 'messages':
-        setTimeout(()=>{
+        messagesHeaderTimeout = window.setTimeout(()=>{
           dispatch(startClickingMessagesIcon());
-        }, 0.001)
+        }, 0.001);
         dispatch(showMessagesDropdown(!messagesDropdownShown));
         break;
       case 'notifications':
-        setTimeout(()=>{
+        notificationsHeaderTimeout = window.setTimeout(()=>{
           dispatch(startClickingNotificationsIcon());
-        }, 0.001)
-    
+        }, 0.001);
         dispatch(showNotificationsDropdown(!notificationsDropdownShown));
-      
         break;
     }
   }else{
