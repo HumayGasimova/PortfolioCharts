@@ -24,7 +24,8 @@ import {
   faPizzaSlice,
   faEnvelope,
   faUserCheck,
-  faCircleCheck
+  faCircleCheck,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -175,16 +176,25 @@ export default function ToolbarDropdown(props: any) {
             }else if(props.iconKey === "notificationsDropdown"){
               return(
                 <div key={el.id} className={styles.notificationWrapper} onClick={()=> onItemClick(el.key)}>
-                   <FontAwesomeIcon 
-                      icon={setIconName(el.icon)}
-                      color={setIconName(el.icon) === faExclamation ? 'red' : 'rgb(165, 165, 165)'}
-                      size='lg'
-                    />
-                  {/* <div className={styles.activity} style={{backgroundColor: el.action === "online" ? "rgb(18, 187, 18)" : "rgb(148 158 183)"}}/> */}
+                  <div className={styles.notificationIconTextWrapper}>
+                    <div className={styles.notificationIconCircle} style={{backgroundColor: el.color}}>
+                      <FontAwesomeIcon 
+                        icon={setIconName(el.icon)}
+                        color="white"
+                        size='sm'
+                      />
+                    </div>
+                    <div>
+                      <div className={styles.itemHeader}>{el.header}</div>
+                      <div className={styles.date}>{el.date}</div>
+                    </div>
+                  </div>
                   <div>
-                    {/* <div className={styles.fullname}>{el.fullName}</div>
-                    <div className={styles.message}>{el.message.substring(0, 52)}......</div>
-                    <div className={styles.date}>{el.date}</div> */}
+                    <FontAwesomeIcon 
+                      icon={faChevronRight}
+                      color="rgb(128, 128, 128)"
+                      size='sm'
+                    />
                   </div>
                 </div>
               )
@@ -192,7 +202,7 @@ export default function ToolbarDropdown(props: any) {
           })}
         </div>
       </div>
-      <div className={styles.messagesFooter}>
+      <div className={styles.dropdownFooter}>
           <div className={styles.viewAllbtn} onClick={showChatPage}>VIEW ALL</div>
       </div>
   </div>

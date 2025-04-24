@@ -17,7 +17,7 @@ const initialState: any = {
             header: "New files available",
             date: "10 hours ago",
             icon: "faFileLines",
-            color: ""
+            color: "rgb(240, 0, 117)"
         },
         {
             id: 2,
@@ -25,7 +25,7 @@ const initialState: any = {
             header: "Updates Available",
             date: "2 days ago",
             icon: "faGem",
-            color: ""
+            color: "rgb(72, 0, 201)"
         },
         {
             id: 3,
@@ -33,7 +33,7 @@ const initialState: any = {
             header: "New Order Received",
             date: "1 hour ago",
             icon: "faPizzaSlice",
-            color: ""
+            color: "rgb(34, 192, 60)"
         },
         {
             id: 4,
@@ -41,7 +41,7 @@ const initialState: any = {
             header: "New review received",
             date: "1 day ago",
             icon: "faEnvelope",
-            color: ""
+            color: "rgb(251, 188, 11)"
         },
         {
             id: 5,
@@ -49,7 +49,7 @@ const initialState: any = {
             header: "22 verified registrations available",
             date: "2 hours ago",
             icon: "faUserCheck",
-            color: ""
+            color: "rgb(238, 51, 94)"
         },
         {
             id: 6,
@@ -57,7 +57,7 @@ const initialState: any = {
             header: "Project has been approved",
             date: "4 hours ago",
             icon: "faCircleCheck",
-            color: ""
+            color: "rgb(1, 98, 232)"
         }
     ]
 }
