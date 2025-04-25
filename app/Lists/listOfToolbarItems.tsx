@@ -29,7 +29,7 @@ export const listOfToolbarItems = [
     },
     {
         id: 5,
-        key: "zoom",
+        key: "fullscreen",
         type: "icon",
         name: "faExpand",
         action: ""

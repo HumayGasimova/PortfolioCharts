@@ -18,6 +18,7 @@ export const portfolioSlice = createSlice({
     portfolioMood: "light",
     messagesHeaderHeight: 0,
     notificationsHeaderHeight: 0,
+    fullScreen: false,
     toolbarItems: [
       {
         id: 1,
@@ -49,7 +50,7 @@ export const portfolioSlice = createSlice({
     },
     {
         id: 5,
-        key: "zoom",
+        key: "fullscreen",
         type: "icon",
         name: "faExpand",
         action: ""
@@ -106,13 +107,25 @@ export const portfolioSlice = createSlice({
       }
       
       state.portfolioMood = action.payload;
-      state.toolbarItems.splice(1,moodIndex,mood);
+      state.toolbarItems.splice(moodIndex, 1, mood);
     },
     setMessagesHeaderHeight: (state, action) => {
       state.messagesHeaderHeight = action.payload;
     },
     setNotificationsHeaderHeight: (state, action) => {
       state.notificationsHeaderHeight = action.payload;
+    },
+    setFullScreen: (state, action) => {
+      state.fullScreen = action.payload;
+
+      let fullScreen = state.toolbarItems.find(item => item.key === "fullscreen") as ToolbarItem;
+      let fullScreenIndex =  state.toolbarItems.findIndex(item => item.key === "fullscreen");
+      fullScreen = {
+        ...fullScreen,
+        name: action.payload ? "faCompress" : "faExpand",
+      }
+      
+      state.toolbarItems.splice(fullScreenIndex, 1, fullScreen);
     },
     startClickingMessagesIcon: (state) => {},
     startClickingNotificationsIcon: (state) => {}
@@ -128,7 +141,8 @@ export const {
   setMessagesHeaderHeight,
   setNotificationsHeaderHeight,
   startClickingMessagesIcon, 
-  startClickingNotificationsIcon 
+  startClickingNotificationsIcon,
+  setFullScreen
 } = portfolioSlice.actions
 
 export default portfolioSlice.reducer

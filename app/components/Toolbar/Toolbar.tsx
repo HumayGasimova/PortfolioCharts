@@ -36,7 +36,8 @@ import {
   setPortfolioLang,
   setPortfolioMood,
   startClickingMessagesIcon,
-  startClickingNotificationsIcon
+  startClickingNotificationsIcon,
+  setFullScreen
 } from '../../../lib/slices/portfolioSlice';
 
 import {
@@ -97,6 +98,11 @@ export default function Toolbar() {
     (state: RootState) => state.notifications.notificationsList,
   );
 
+  const fullScreen = useSelector(
+    (state: RootState) => state.portfolio.fullScreen,
+  );
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -126,15 +132,14 @@ export default function Toolbar() {
         return faBars;
       case 'faGear':
         return faGear;
-        case 'faSun':
-          return faSun;
+      case 'faSun':
+        return faSun;
       default:
         return faExclamation;
     }
  }
 
  const onToolbarIconClick = (e: React.MouseEvent, btnKey: string) => {
-  
   if(e.button === 2) return;
 
   if(e.button !== 1){
@@ -142,7 +147,6 @@ export default function Toolbar() {
       case 'lang': 
         dispatch(showLangDropdown(!langDropdownShown))
         break;
-        
       case 'mood': 
         if(portfolioMood === "light"){
           setTheme("dark");
@@ -163,6 +167,25 @@ export default function Toolbar() {
           dispatch(startClickingNotificationsIcon());
         }, 0.001);
         dispatch(showNotificationsDropdown(!notificationsDropdownShown));
+        break;
+      case 'fullscreen':
+        dispatch(setFullScreen(!fullScreen));
+
+        let elem = document.getElementById("app") as any;
+        if (fullScreen) {
+          console.log(fullScreen)
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }else{
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+          }
+        }
         break;
     }
   }else{
