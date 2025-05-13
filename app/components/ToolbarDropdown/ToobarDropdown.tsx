@@ -40,6 +40,9 @@ export default function ToolbarDropdown(props: any) {
     (state: RootState) => state.portfolio.notificationsHeaderHeight,
   )
 
+  const profileHeaderHeight = useSelector(
+    (state: RootState) => state.portfolio.profileHeaderHeight,
+  )
 
   const dispatch = useDispatch();
 
@@ -98,6 +101,8 @@ export default function ToolbarDropdown(props: any) {
           return "235px";
         case "notificationsDropdown":
           return "200px";
+          case "profileDropdown":
+            return "73px";
         default:
             return 0;
       }
@@ -109,6 +114,8 @@ export default function ToolbarDropdown(props: any) {
         return `${messagesHeaderHeight}px`;
       case "notificationsDropdown":
         return `${notificationsHeaderHeight}px`;
+      case "profileDropdown":
+        return `${profileHeaderHeight}px`;
       default:
         return 0;
     }
@@ -120,6 +127,8 @@ export default function ToolbarDropdown(props: any) {
         return "messagesHeader";
       case "notificationsDropdown":
         return "notificationsHeader";
+      case "profileDropdown":
+        return "profileHeader";
     }
   }
 
@@ -148,9 +157,11 @@ export default function ToolbarDropdown(props: any) {
         <div className={styles.dropdownHeader} id={setElemenyId(props.iconKey)}>
           <div>
             <div className={styles.header}>{props.header}</div>
-            <div className={styles.unreadMessages}>You have {props.list.length} unread messages</div>
+            {props.iconKey === "profileDropdown" ? 
+            <div className={styles.unreadMessages}>userName</div> : 
+            <div className={styles.unreadMessages}>You have {props.list.length} unread messages</div>}
           </div>
-          <div className={styles.headerBtn} onClick={readAllMessagesBtnHandler}>Mark All Read</div>
+         {props.iconKey !== "profileDropdown" ? <div className={styles.headerBtn} onClick={readAllMessagesBtnHandler}>Mark All Read</div> : null}
         </div>
         <div 
           className={styles.dropdownItemWrapper} 
@@ -199,12 +210,42 @@ export default function ToolbarDropdown(props: any) {
                 </div>
               )
             }
+            else if(props.iconKey === "profileDropdown"){
+              return(
+                <div key={el.id}></div>
+                // <div key={el.id} className={styles.notificationWrapper} onClick={()=> onItemClick(el.key)}>
+                //   <div className={styles.notificationIconTextWrapper}>
+                //     <div className={styles.notificationIconCircle} style={{backgroundColor: el.color}}>
+                //       <FontAwesomeIcon 
+                //         icon={setIconName(el.icon)}
+                //         color="white"
+                //         size='sm'
+                //       />
+                //     </div>
+                //     <div>
+                //       <div className={styles.itemHeader}>{el.header}</div>
+                //       <div className={styles.date}>{el.date}</div>
+                //     </div>
+                //   </div>
+                //   <div>
+                //     <FontAwesomeIcon 
+                //       icon={faChevronRight}
+                //       color="rgb(128, 128, 128)"
+                //       size='sm'
+                //     />
+                //   </div>
+                // </div>
+              )
+            }
           })}
         </div>
       </div>
+      {props.iconKey !== "profileDropdown" ?
       <div className={styles.dropdownFooter}>
-          <div className={styles.viewAllbtn} onClick={showChatPage}>VIEW ALL</div>
-      </div>
+        <div className={styles.viewAllbtn} onClick={showChatPage}>VIEW ALL</div>
+      </div> 
+    : null }
+     
   </div>
   )
 }

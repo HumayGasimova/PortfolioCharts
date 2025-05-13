@@ -10,11 +10,16 @@ import {
 
 import { 
   faBars,
+  faCircleUser,
   faCompress,
   faExclamation,
   faExpand,
   faGear,
+  faInbox,
+  faRightFromBracket,
   faSearch,
+  faSliders,
+  faSlidersH,
   faSun
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -33,10 +38,12 @@ import {
   showLangDropdown,
   showMessagesDropdown,
   showNotificationsDropdown,
+  showProfileDropdown,
   setPortfolioLang,
   setPortfolioMood,
   startClickingMessagesIcon,
   startClickingNotificationsIcon,
+  startClickingProfileIcon,
   setFullScreen
 } from '../../../lib/slices/portfolioSlice';
 
@@ -67,7 +74,8 @@ export default function Toolbar() {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   let messagesHeaderTimeout: number;
   let notificationsHeaderTimeout: number;
-
+  let profileHeaderTimeout: number;
+  
   const {theme, setTheme} = useTheme();
 
   const langDropdownShown = useSelector(
@@ -80,6 +88,10 @@ export default function Toolbar() {
     (state: RootState) => state.portfolio.notificationsDropdownShown,
   );
   
+  const profileDropdownShown = useSelector(
+    (state: RootState) => state.portfolio.profileDropdownShown,
+  );
+
   const selectedLangKey = useSelector(
     (state: RootState) => state.portfolio.selectedLangKey,
   );
@@ -106,13 +118,12 @@ export default function Toolbar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  
-
     return () => {
         // Cleaning the unmounted component
 
         clearTimeout(messagesHeaderTimeout);
         clearTimeout(notificationsHeaderTimeout);
+        clearTimeout(profileHeaderTimeout);
     }
 }, []);
 
@@ -134,6 +145,16 @@ export default function Toolbar() {
         return faGear;
       case 'faSun':
         return faSun;
+      case 'faCircleUser':
+        return faCircleUser;
+      case 'faInbox':
+        return faInbox;
+      case 'faEnvelope':
+        return faEnvelope;
+      case 'faSliders':
+        return faSlidersH;
+      case 'faRightFromBracket':
+        return faRightFromBracket;
       default:
         return faExclamation;
     }
@@ -167,6 +188,12 @@ export default function Toolbar() {
           dispatch(startClickingNotificationsIcon());
         }, 0.001);
         dispatch(showNotificationsDropdown(!notificationsDropdownShown));
+        break;
+      case 'profile':
+        profileHeaderTimeout = window.setTimeout(()=>{
+          dispatch(startClickingProfileIcon());
+        }, 0.001);
+        dispatch(showProfileDropdown(!profileDropdownShown));
         break;
       case 'fullscreen':
         dispatch(setFullScreen(!fullScreen));
@@ -274,6 +301,15 @@ export default function Toolbar() {
           iconKey="notificationsDropdown"
           header="Notifications"
           list={notificationsList}
+        />
+      )
+    }
+    else if(profileDropdownShown){
+      return(
+        <ToolbarDropdown
+          iconKey="profileDropdown"
+          header="Profile"
+          list={Lists.listOfProfileSettings}
         />
       )
     }

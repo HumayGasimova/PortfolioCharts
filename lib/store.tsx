@@ -14,7 +14,8 @@ const epicMiddleware = createEpicMiddleware();
 
 export const rootEpic = combineEpics(
     Epic.startClickingMessagesIconEpic,
-    Epic.startClickingNotificationsIconEpic
+    Epic.startClickingNotificationsIconEpic,
+    Epic.startClickingProfileIconEpic
   );
 
 export const store = configureStore({
@@ -24,7 +25,7 @@ export const store = configureStore({
         counter: counterSliceReducers,
         portfolio: portfolioReducer,
         messages: messagesReducer,
-        notifications: notificationsReducer
+        notifications: notificationsReducer,
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(

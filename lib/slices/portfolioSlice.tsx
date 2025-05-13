@@ -14,10 +14,12 @@ export const portfolioSlice = createSlice({
     langDropdownShown: false,
     messagesDropdownShown: false,
     notificationsDropdownShown: false,
+    profileDropdownShown: false,
     selectedLangKey: "azeri",
     portfolioMood: "light",
     messagesHeaderHeight: 0,
     notificationsHeaderHeight: 0,
+    profileHeaderHeight: 0,
     fullScreen: false,
     toolbarItems: [
       {
@@ -83,14 +85,23 @@ export const portfolioSlice = createSlice({
       state.langDropdownShown = action.payload;
       state.messagesDropdownShown = false;
       state.notificationsDropdownShown = false;
+      state.profileDropdownShown = false;
     },
     showMessagesDropdown: (state, action) => {
       state.messagesDropdownShown = action.payload;
       state.langDropdownShown = false;
       state.notificationsDropdownShown = false;
+      state.profileDropdownShown = false;
     },
     showNotificationsDropdown: (state, action) => {
       state.notificationsDropdownShown = action.payload;
+      state.messagesDropdownShown = false;
+      state.langDropdownShown = false;
+      state.profileDropdownShown = false;
+    },
+    showProfileDropdown: (state, action) => {
+      state.profileDropdownShown = action.payload;
+      state.notificationsDropdownShown = false;
       state.messagesDropdownShown = false;
       state.langDropdownShown = false;
     },
@@ -115,6 +126,9 @@ export const portfolioSlice = createSlice({
     setNotificationsHeaderHeight: (state, action) => {
       state.notificationsHeaderHeight = action.payload;
     },
+    setProfileHeaderHeight: (state, action) => {
+      state.profileHeaderHeight = action.payload;
+    },
     setFullScreen: (state, action) => {
       state.fullScreen = action.payload;
 
@@ -128,20 +142,24 @@ export const portfolioSlice = createSlice({
       state.toolbarItems.splice(fullScreenIndex, 1, fullScreen);
     },
     startClickingMessagesIcon: (state) => {},
-    startClickingNotificationsIcon: (state) => {}
+    startClickingNotificationsIcon: (state) => {},
+    startClickingProfileIcon: (state) => {}
   },
 })
 
 export const { 
   showLangDropdown, 
   showMessagesDropdown, 
-  showNotificationsDropdown, 
+  showNotificationsDropdown,
+  showProfileDropdown,
   setPortfolioLang, 
   setPortfolioMood, 
   setMessagesHeaderHeight,
   setNotificationsHeaderHeight,
+  setProfileHeaderHeight,
   startClickingMessagesIcon, 
   startClickingNotificationsIcon,
+  startClickingProfileIcon,
   setFullScreen
 } = portfolioSlice.actions
 
