@@ -25,7 +25,12 @@ import {
   faEnvelope,
   faUserCheck,
   faCircleCheck,
-  faChevronRight
+  faChevronRight,
+  faGear,
+  faCircleUser,
+  faInbox,
+  faSlidersH,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -82,7 +87,7 @@ export default function ToolbarDropdown(props: any) {
   }
 
   const onItemClick = (key: string) => {
-    
+    console.log("item clicked")
     // dispatch(showLangDropdown(false));
     // dispatch(setPortfolioLang(key));
   }
@@ -104,8 +109,32 @@ export default function ToolbarDropdown(props: any) {
           case "profileDropdown":
             return "73px";
         default:
-            return 0;
+            return "0px";
       }
+  }
+
+  const setDropdownWidth = () => {
+    switch(props.iconKey){
+      case "messagesDropdown":
+        case "notificationsDropdown":
+        return 300;
+        case "profileDropdown":
+          return 200;
+      default:
+          return 0;
+    }
+  }
+
+  const setDropdownHeight = () => {
+    switch(props.iconKey){
+      case "messagesDropdown":
+        case "notificationsDropdown":
+        return "340px";
+        case "profileDropdown":
+          return "318px";
+      default:
+          return "0px";
+    }
   }
 
   const setMessagesHeaderHeight = (key: string) => {
@@ -146,15 +175,27 @@ export default function ToolbarDropdown(props: any) {
         return faUserCheck;
       case 'faCircleCheck':
         return faCircleCheck;
-       default:
+      case 'faGear':
+        return faGear;
+      case 'faCircleUser':
+        return faCircleUser;
+      case 'faInbox':
+        return faInbox;
+      case 'faEnvelope':
+        return faEnvelope;
+      case 'faSliders':
+        return faSlidersH;
+      case 'faRightFromBracket':
+        return faRightFromBracket;
+      default:
          return faExclamation;
      }
   }
 
   return (
-    <div className={styles.dropdownArrow} style={{right: setRightPosition()}}>
+    <div className={styles.dropdownArrow} style={{right: setRightPosition(), width: setDropdownWidth(), height: setDropdownHeight()}}>
       <div className={styles.dropdownWrapper}>
-        <div className={styles.dropdownHeader} id={setElemenyId(props.iconKey)}>
+        <div className={styles.dropdownHeader} id={setElemenyId(props.iconKey)} style={{width: `${setDropdownWidth() - 2}px`, justifyContent: props.iconKey === "profileDropdown" ? "start" : "space-around"}}>
           <div>
             <div className={styles.header}>{props.header}</div>
             {props.iconKey === "profileDropdown" ? 
@@ -212,29 +253,17 @@ export default function ToolbarDropdown(props: any) {
             }
             else if(props.iconKey === "profileDropdown"){
               return(
-                <div key={el.id}></div>
-                // <div key={el.id} className={styles.notificationWrapper} onClick={()=> onItemClick(el.key)}>
-                //   <div className={styles.notificationIconTextWrapper}>
-                //     <div className={styles.notificationIconCircle} style={{backgroundColor: el.color}}>
-                //       <FontAwesomeIcon 
-                //         icon={setIconName(el.icon)}
-                //         color="white"
-                //         size='sm'
-                //       />
-                //     </div>
-                //     <div>
-                //       <div className={styles.itemHeader}>{el.header}</div>
-                //       <div className={styles.date}>{el.date}</div>
-                //     </div>
-                //   </div>
-                //   <div>
-                //     <FontAwesomeIcon 
-                //       icon={faChevronRight}
-                //       color="rgb(128, 128, 128)"
-                //       size='sm'
-                //     />
-                //   </div>
-                // </div>
+                <div key={el.id} className={styles.profileWrapper} onClick={()=> onItemClick(el.key)}>
+                  <div className={styles.profileIconTextWrapper}>
+                    <div className={styles.profileIcon} style={{backgroundColor: el.color}}>
+                      <FontAwesomeIcon 
+                        icon={setIconName(el.iconName)}
+                        size='lg'
+                      />
+                    </div>
+                    <div className={styles.item}>{el.label}</div>
+                  </div>
+                </div>
               )
             }
           })}

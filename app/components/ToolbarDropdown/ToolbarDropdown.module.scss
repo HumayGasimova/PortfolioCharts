@@ -3,7 +3,7 @@
     top: 60px; //60
     // right: 235px;
     width: 300px;
-    height: 340px;
+    // height: 340px;
     border-radius: 7px;
     box-shadow: 0px 1px 1px rgba(0, 0 ,0, .1);
     .dropdownWrapper {
@@ -18,8 +18,8 @@
         .dropdownHeader {
             position: fixed;
             display: flex;
-            width: 298px;
-            justify-content: space-around;
+            // width: 298px;
+            // justify-content: space-around;
             align-items: start;
             background-color: rgb(1, 98, 232);
             padding: 15px;
@@ -30,10 +30,12 @@
                 font-size: 14px;
                 font-weight: bold;
                 font-family: "Open Sans", sans-serif;
+                color: white;
             }
             .unreadMessages {
                 font-size: 11px;
                 font-family: "Open Sans", sans-serif;
+                color: white;
             }
             .headerBtn {
                 border-radius: 15px;
@@ -87,38 +89,69 @@
                     font-weight: bold;
                 }
             }
-           
-                .notificationWrapper {
+            .notificationWrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+                .notificationIconTextWrapper {
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: start;
                     align-items: center;
-                    padding: 10px;
-                    cursor: pointer;
-                    .notificationIconTextWrapper {
+                    .notificationIconCircle {
                         display: flex;
-                        justify-content: start;
+                        justify-content: center;
                         align-items: center;
-                        .notificationIconCircle {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            width: 40px;
-                            height: 40px;
-                            border-radius: 50%;
-                            margin-right: 10px;
-                        }
-                        .itemHeader {
-                            font-size: 14px;
-                            font-family: "Open Sans", sans-serif;
-                            padding-bottom: 10px;
-                        }
-                        .date {
-                            font-size: 13px;
-                            font-family: "Open Sans", sans-serif;
-                            color: rgb(128, 128, 128);
-                        }
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                    }
+                    .itemHeader {
+                        font-size: 14px;
+                        font-family: "Open Sans", sans-serif;
+                        padding-bottom: 10px;
+                    }
+                    .date {
+                        font-size: 13px;
+                        font-family: "Open Sans", sans-serif;
+                        color: rgb(128, 128, 128);
                     }
                 }
+            }
+            .profileWrapper{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+                .profileIconTextWrapper {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    .profileIcon {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                    }
+                    .item {
+                        font-size: 14px;
+                        font-family: "Open Sans", sans-serif;
+                    }
+                }
+                &:hover {
+                    background-color: rgba(159, 196, 248, 0.2);
+                    .profileIcon {
+                        color: rgb(1, 98, 232);
+                    }
+                    .item {
+                        color: rgb(1, 98, 232);
+                    }
+                }
+            }
         }
     }
     .dropdownFooter {
@@ -242,6 +275,30 @@
     color: white;
 }
 
+:root[data-theme="light"] .profileWrapper:not(:last-child) {
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+:root[data-theme="dark"] .profileWrapper:not(:last-child) {
+    border-bottom: 1px solid rgb(64, 64, 65);
+}
+
+:root[data-theme="light"] .profileIcon {
+    color: rgb(77, 77, 77);
+}
+
+:root[data-theme="dark"] .profileIcon {
+    color: white;
+}
+
+:root[data-theme="light"] .item {
+    color: rgb(77, 77, 77);
+}
+
+:root[data-theme="dark"] .item {
+    color: white;
+}
+
 :root[data-theme="dark"] .dropdownFooter {
     border: 1px solid rgb(64, 64, 65);
 }
@@ -249,3 +306,4 @@
 :root[data-theme="light"] .dropdownFooter {
     border: 1px solid rgb(223, 223, 223);
 }
+
