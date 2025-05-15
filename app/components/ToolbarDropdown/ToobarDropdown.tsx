@@ -199,8 +199,8 @@ export default function ToolbarDropdown(props: any) {
           <div>
             <div className={styles.header}>{props.header}</div>
             {props.iconKey === "profileDropdown" ? 
-            <div className={styles.unreadMessages}>userName</div> : 
-            <div className={styles.unreadMessages}>You have {props.list.length} unread messages</div>}
+            <div className={styles.subheader}>{props.userInfo.role}</div> : 
+            <div className={styles.subheader}>You have {props.list.length} unread messages</div>}
           </div>
          {props.iconKey !== "profileDropdown" ? <div className={styles.headerBtn} onClick={readAllMessagesBtnHandler}>Mark All Read</div> : null}
         </div>

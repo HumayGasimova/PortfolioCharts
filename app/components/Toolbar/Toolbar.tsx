@@ -114,7 +114,9 @@ export default function Toolbar() {
     (state: RootState) => state.portfolio.fullScreen,
   );
 
-
+  const userInfo = useSelector(
+    (state: RootState) => state.portfolio.userInfo,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -308,8 +310,9 @@ export default function Toolbar() {
       return(
         <ToolbarDropdown
           iconKey="profileDropdown"
-          header="Profile"
+          header={userInfo.fullname}
           list={Lists.listOfProfileSettings}
+          userInfo={userInfo}
         />
       )
     }

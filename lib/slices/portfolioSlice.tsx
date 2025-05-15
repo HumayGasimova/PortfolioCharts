@@ -21,6 +21,10 @@ export const portfolioSlice = createSlice({
     notificationsHeaderHeight: 0,
     profileHeaderHeight: 0,
     fullScreen: false,
+    userInfo: {
+      fullname: "Petey Cruiser",
+      role: "Premium Member"
+    },
     toolbarItems: [
       {
         id: 1,
