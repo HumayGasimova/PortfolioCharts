@@ -36,7 +36,7 @@ export const listOfToolbarItems = [
     },
     {
         id: 6,
-        key: "allNotifications",
+        key: "menu",
         type: "icon",
         name: "faBars",
         action: ""

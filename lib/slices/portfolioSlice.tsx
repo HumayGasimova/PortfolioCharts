@@ -15,6 +15,7 @@ export const portfolioSlice = createSlice({
     messagesDropdownShown: false,
     notificationsDropdownShown: false,
     profileDropdownShown: false,
+    menuShown: false,
     selectedLangKey: "azeri",
     portfolioMood: "light",
     messagesHeaderHeight: 0,
@@ -63,7 +64,7 @@ export const portfolioSlice = createSlice({
     },
     {
         id: 6,
-        key: "allNotifications",
+        key: "menu",
         type: "icon",
         name: "faBars",
         action: ""
@@ -90,24 +91,36 @@ export const portfolioSlice = createSlice({
       state.messagesDropdownShown = false;
       state.notificationsDropdownShown = false;
       state.profileDropdownShown = false;
+      state.menuShown = false;
     },
     showMessagesDropdown: (state, action) => {
       state.messagesDropdownShown = action.payload;
       state.langDropdownShown = false;
       state.notificationsDropdownShown = false;
       state.profileDropdownShown = false;
+      state.menuShown = false;
     },
     showNotificationsDropdown: (state, action) => {
       state.notificationsDropdownShown = action.payload;
       state.messagesDropdownShown = false;
       state.langDropdownShown = false;
       state.profileDropdownShown = false;
+      state.menuShown = false;
     },
     showProfileDropdown: (state, action) => {
       state.profileDropdownShown = action.payload;
       state.notificationsDropdownShown = false;
       state.messagesDropdownShown = false;
       state.langDropdownShown = false;
+      state.menuShown = false;
+    },
+    showMenu: (state, action) => {
+      state.menuShown = action.payload;
+      state.profileDropdownShown = false;
+      state.notificationsDropdownShown = false;
+      state.messagesDropdownShown = false;
+      state.langDropdownShown = false;
+
     },
     setPortfolioLang: (state, action) => {
       state.selectedLangKey = action.payload;
@@ -156,6 +169,7 @@ export const {
   showMessagesDropdown, 
   showNotificationsDropdown,
   showProfileDropdown,
+  showMenu,
   setPortfolioLang, 
   setPortfolioMood, 
   setMessagesHeaderHeight,

@@ -39,6 +39,7 @@ import {
   showMessagesDropdown,
   showNotificationsDropdown,
   showProfileDropdown,
+  showMenu,
   setPortfolioLang,
   setPortfolioMood,
   startClickingMessagesIcon,
@@ -57,6 +58,7 @@ import * as Images from '../../constants/images';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import { useTheme } from 'next-themes';
 import ToolbarDropdown from '../ToolbarDropdown/ToobarDropdown';
+import ToolbarMenu from '../ToolbarMenu/ToobarMenu';
 
 
 type Inputs = {
@@ -92,6 +94,10 @@ export default function Toolbar() {
     (state: RootState) => state.portfolio.profileDropdownShown,
   );
 
+  const menuShown = useSelector(
+    (state: RootState) => state.portfolio.menuShown,
+  );
+  
   const selectedLangKey = useSelector(
     (state: RootState) => state.portfolio.selectedLangKey,
   );
@@ -216,6 +222,8 @@ export default function Toolbar() {
           }
         }
         break;
+        case 'menu':
+          dispatch(showMenu(!menuShown));
     }
   }else{
 
@@ -317,6 +325,17 @@ export default function Toolbar() {
       )
     }
   }
+
+  const renderMenu = () => {
+    if(menuShown){
+      return(
+        <div>
+         <ToolbarMenu/>
+        </div>
+      )
+    }
+  }
+
   const renderImage = (key: string) => {
     switch(key){
       case "lang":
@@ -367,6 +386,7 @@ export default function Toolbar() {
             )
           })}
           {renderDropdowns()}
+          {renderMenu()}
         </div>
       </>
     )
