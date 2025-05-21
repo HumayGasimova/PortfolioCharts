@@ -15,7 +15,7 @@ export const portfolioSlice = createSlice({
     messagesDropdownShown: false,
     notificationsDropdownShown: false,
     profileDropdownShown: false,
-    menuShown: false,
+    menuShown: "init",
     selectedLangKey: "azeri",
     portfolioMood: "light",
     messagesHeaderHeight: 0,
@@ -83,6 +83,32 @@ export const portfolioSlice = createSlice({
         name: "faGear",
         action: "spin"
     },
+    ],
+    listOfMenuBtns: [
+      {
+        id: 1,
+        key: "chatBtn",
+        active: true,
+        hover: false,
+        iconName: "",
+        label: "Chat"
+      },
+      {
+          id: 1,
+          key: "notificationsBtn",
+          active: false,
+          hover: false,
+          iconName: "",
+          label: "Notifications"
+      },
+      {
+          id: 1,
+          key: "friendsBtn",
+          active: false,
+          hover: false,
+          iconName: "",
+          label: "Friends"
+      }
     ]
   },
   reducers: {

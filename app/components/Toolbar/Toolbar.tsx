@@ -223,7 +223,14 @@ export default function Toolbar() {
         }
         break;
         case 'menu':
-          dispatch(showMenu(!menuShown));
+        
+          switch(menuShown){
+            case 'open':
+                return dispatch(showMenu("close"));
+            case 'close':
+                return dispatch(showMenu("open"));
+        }
+        dispatch(showMenu("open"));
     }
   }else{
 
@@ -330,7 +337,10 @@ export default function Toolbar() {
     if(menuShown){
       return(
         <div>
-         <ToolbarMenu/>
+          <ToolbarMenu 
+            key="menu"
+            menuShown={menuShown} 
+            header={"NOTIFICATIONS"}/>
         </div>
       )
     }
